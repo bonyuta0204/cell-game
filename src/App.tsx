@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { initBoard, clickCell, isCellActive } from "./lib/boardLogic";
-import type { Board } from "./lib/boardLogic";
+import { initBoard, clickCell } from "./lib/boardLogic";
+import type { Board as BoardType } from "./lib/boardLogic";
+import Board from "./ui/Board";
 import "./App.css";
 
+const BoardSize = 6 as const;
+
 function App() {
-  const [board, setBoard] = useState<Board>(initBoard());
+  const [board, setBoard] = useState<BoardType>(initBoard(BoardSize));
 
   const onClickCell = (rowIndex: number, colIndex: number) => {
     setBoard(clickCell(board, rowIndex, colIndex));
@@ -12,18 +15,7 @@ function App() {
 
   return (
     <div className="board">
-      {board.map((row, rowIndex) => (
-        <div className="row">
-          {row.map((cell, colIndex) => (
-            <div
-              className="cell"
-              onClick={() => onClickCell(rowIndex, colIndex)}
-            >
-              <div className={isCellActive(cell) ? "active" : "deactive"}></div>
-            </div>
-          ))}
-        </div>
-      ))}
+      <Board board={board} onClickCell={onClickCell} />
     </div>
   );
 }
