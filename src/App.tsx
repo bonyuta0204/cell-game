@@ -14,7 +14,7 @@ function App() {
   };
 
   return (
-    <div className="board">
+    <div className="flex">
       <Board board={board} onClickCell={onClickCell} />
     </div>
   );

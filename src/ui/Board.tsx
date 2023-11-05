@@ -9,15 +9,21 @@ type BoardProps = {
 
 function Board({ board, onClickCell }: BoardProps) {
   return (
-    <div className="board">
+    <div className="flex">
       {board.map((row, rowIndex) => (
-        <div className="row">
+        <div className="flex-row">
           {row.map((cell, colIndex) => (
             <div
-              className="cell"
+              className="w-16 h-16 border border-gray-400 box-border"
               onClick={() => onClickCell(rowIndex, colIndex)}
             >
-              <div className={isCellActive(cell) ? "active" : "deactive"}></div>
+              <div
+                className={
+                  isCellActive(cell)
+                    ? "bg-white w-full h-full"
+                    : "bg-black w-full h-full"
+                }
+              ></div>
             </div>
           ))}
         </div>
