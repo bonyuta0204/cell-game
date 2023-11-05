@@ -4,7 +4,7 @@ import type { Board as BoardType } from './lib/boardLogic'
 import Board from './ui/Board'
 import Button from './ui/Button'
 import './App.css'
-import { GameNode, solve } from './lib/solver'
+import { GameNode } from './lib/solver'
 import BoardResult from './ui/BoardResult'
 
 const BoardSize = 6 as const
@@ -18,8 +18,16 @@ function App() {
   }
 
   const onClickSolve = () => {
-    const result = solve(board)
-    setSolvedResult(result)
+    const solverWorker = new Worker(
+      new URL('./workers/solver.ts', import.meta.url),
+      { type: 'module' }
+    )
+
+    solverWorker.postMessage(board)
+    solverWorker.onmessage = (event) => {
+      const result: GameNode = event.data
+      setSolvedResult(result)
+    }
   }
 
   return (
