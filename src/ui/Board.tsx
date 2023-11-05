@@ -1,10 +1,9 @@
 import { isCellActive } from '../lib/boardLogic'
 import { Board as BoardType } from '../lib/boardLogic'
-import './Board.css'
 
 type BoardProps = {
   board: BoardType
-  onClickCell: (rowIndex: number, colIndex: number) => void
+  onClickCell?: (rowIndex: number, colIndex: number) => void
 }
 
 function Board({ board, onClickCell }: BoardProps) {
@@ -15,7 +14,7 @@ function Board({ board, onClickCell }: BoardProps) {
           {row.map((cell, colIndex) => (
             <div
               className="w-16 h-16 border border-gray-400 box-border"
-              onClick={() => onClickCell(rowIndex, colIndex)}
+              onClick={() => onClickCell && onClickCell(rowIndex, colIndex)}
             >
               <div
                 className={

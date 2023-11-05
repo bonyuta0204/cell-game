@@ -37,7 +37,7 @@ export function isCellActive(cell: Cell): boolean {
 
 export const initEmptyBoard = (boardSize: number): Board => {
   const board: Board = Array.from({ length: boardSize }, () =>
-    Array.from({ length: boardSize }, () => activeCell)
+    Array.from({ length: boardSize }, () => deactiveCell)
   )
   return board
 }
@@ -46,7 +46,7 @@ export const initRandomBoard = (boardSize: number): Board => {
   let board: Board = initEmptyBoard(boardSize)
   const actions = getAvailableActions(board)
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 3; i++) {
     const action = actions[Math.floor(Math.random() * actions.length)]
     board = clickCell(board, action.rowIndex, action.colIndex)
   }
