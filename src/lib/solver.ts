@@ -1,9 +1,10 @@
-import { Board, isSolved, clickCell } from "./boardLogic";
-
-type Action = {
-  rowIndex: number;
-  colIndex: number;
-};
+import {
+  Board,
+  isSolved,
+  clickCell,
+  Action,
+  getAvailableActions,
+} from "./boardLogic";
 
 export type GameNode = {
   board: Board;
@@ -11,12 +12,6 @@ export type GameNode = {
   boardHistory: Board[];
   step: number;
 };
-
-export function getAvailableActions(board: Board): Action[] {
-  return board.flatMap((row, rowIndex) =>
-    row.map((_, colIndex) => ({ rowIndex, colIndex }))
-  );
-}
 
 export function getNextNodes(node: GameNode, actions: Action[]) {
   return actions.map((action) => {

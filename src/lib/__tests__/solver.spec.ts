@@ -1,10 +1,10 @@
 import { expect, describe, it } from "vitest";
-import { getNextNodes, getAvailableActions, GameNode, solve } from "../solver";
-import { Board, initBoard } from "../boardLogic";
+import { getNextNodes, GameNode, solve } from "../solver";
+import { Board, getAvailableActions, initEmptyBoard } from "../boardLogic";
 
 describe("getNextNodes", () => {
   it("listup available actions", () => {
-    const board = initBoard(3);
+    const board = initEmptyBoard(3);
 
     const actions = getAvailableActions(board);
     expect(actions).toEqual([
