@@ -3,26 +3,26 @@ import {
   isSolved,
   clickCell,
   Action,
-  getAvailableActions,
-} from "./boardLogic";
+  getAvailableActions
+} from './boardLogic'
 
 export type GameNode = {
-  board: Board;
-  actionHistory: Action[];
-  boardHistory: Board[];
-  step: number;
-};
+  board: Board
+  actionHistory: Action[]
+  boardHistory: Board[]
+  step: number
+}
 
 export function getNextNodes(node: GameNode, actions: Action[]) {
   return actions.map((action) => {
-    const nextBoard = clickCell(node.board, action.rowIndex, action.colIndex);
+    const nextBoard = clickCell(node.board, action.rowIndex, action.colIndex)
     return {
       board: nextBoard,
       actionHistory: [...node.actionHistory, action],
       boardHistory: [...node.boardHistory, nextBoard],
-      step: node.step + 1,
-    };
-  });
+      step: node.step + 1
+    }
+  })
 }
 
 /**
@@ -46,23 +46,23 @@ export function solve(board: Board): GameNode {
       board,
       actionHistory: [],
       boardHistory: [board],
-      step: 0,
-    },
-  ];
+      step: 0
+    }
+  ]
 
-  const nextActions = getAvailableActions(board);
+  const nextActions = getAvailableActions(board)
 
   while (queue.length > 0) {
-    const node = queue.shift() as GameNode;
-    const { board } = node;
+    const node = queue.shift() as GameNode
+    const { board } = node
 
     if (isSolved(board)) {
-      return node;
+      return node
     }
 
-    const nextNodes = getNextNodes(node, nextActions);
-    queue.push(...nextNodes);
+    const nextNodes = getNextNodes(node, nextActions)
+    queue.push(...nextNodes)
   }
 
-  throw new Error("解が見つかりませんでした");
+  throw new Error('解が見つかりませんでした')
 }

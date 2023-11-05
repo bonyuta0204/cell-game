@@ -1,11 +1,11 @@
-import { isCellActive } from "../lib/boardLogic";
-import { Board as BoardType } from "../lib/boardLogic";
-import "./Board.css";
+import { isCellActive } from '../lib/boardLogic'
+import { Board as BoardType } from '../lib/boardLogic'
+import './Board.css'
 
 type BoardProps = {
-  board: BoardType;
-  onClickCell: (rowIndex: number, colIndex: number) => void;
-};
+  board: BoardType
+  onClickCell: (rowIndex: number, colIndex: number) => void
+}
 
 function Board({ board, onClickCell }: BoardProps) {
   return (
@@ -20,8 +20,8 @@ function Board({ board, onClickCell }: BoardProps) {
               <div
                 className={
                   isCellActive(cell)
-                    ? "bg-white w-full h-full"
-                    : "bg-black w-full h-full"
+                    ? 'bg-white w-full h-full'
+                    : 'bg-black w-full h-full'
                 }
               ></div>
             </div>
@@ -29,7 +29,7 @@ function Board({ board, onClickCell }: BoardProps) {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
-export default Board;
+export default Board
